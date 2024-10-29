@@ -78,6 +78,8 @@ MODIFICARE IL PROGRAMMA CON LA PROPRIA MAIL E LA PROPRIA PASSWORD PER LE APP DI 
 ----
 ------------------------------------------------------------------------------------------------------------------------------------------
 
+Screenshot relativi al programma
+
 
 
 
