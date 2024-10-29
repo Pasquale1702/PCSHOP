@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/layout}">
+<head>
+    <title>Negozio PC</title>
+    <script>
+    async function gestoreLoad() {
+        try {
+            const response = await fetch('/randomCocktail');
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            // Display cocktail data
+            document.getElementById('cocktailName').innerText = data.drink.strDrink;
+            document.getElementById('cocktailImage').src = data.drink.strDrinkThumb;
+            document.getElementById('cocktailInstructions').innerText = data.drink.strInstructionsIT;
+
+        } catch (error) {
+            console.error('Error fetching the cocktail:', error);
+        }
+    }
+
+    const amiiboData = {
+        "amiibo": [
+            {
+                "amiiboSeries": "Mario Sports Superstars",
+                "character": "Metal Mario",
+                "gameSeries": "Mario Sports Superstars",
+                "image": "https://raw.githubusercontent.com/N3evin/AmiiboAPI/master/images/icon_09d00301-02bb0e02.png",
+                "name": "Metal Mario - Tennis",
+                "release": {
+                    "na": "2017-03-24"
+                }
+            },
+            {
+    			"amiiboSeries": "Mario Sports Superstars",
+    			"character": "Pink Gold Peach",
+    			"gameSeries": "Mario Sports Superstars",
+    			"head": "09d10101",
+    			"image": "https://raw.githubusercontent.com/N3evin/AmiiboAPI/master/images/icon_09d10101-02be0e02.png",
+    			"name": "Pink Gold Peach - Soccer",
+    			"release": {
+    				"au": "2017-03-11",
+    				"eu": "2017-03-10",
+    				"jp": "2017-03-30",
+    				"na": "2017-03-24"
+    			},
+    			"tail": "01450502",
+    			"type": "Card"
+    		},
+    		{
+    			"amiiboSeries": "Super Nintendo World",
+    			"character": "Daisy",
+    			"gameSeries": "Super Mario",
+    			"head": "00130003",
+    			"image": "https://raw.githubusercontent.com/N3evin/AmiiboAPI/master/images/icon_00130003-039eff02.png",
+    			"name": "Daisy - Power Up Band",
+    			"release": {
+    				"au": null,
+    				"eu": null,
+    				"jp": "2021-02-04",
+    				"na": null
+    			},
+    			"tail": "039eff02",
+    			"type": "Band"
+    		},
+        ]
+    };
+
+    function loadAmiibo() {
+        const amiiboContainer = document.getElementById('amiiboContainer');
+        amiiboData.amiibo.forEach(amiibo => {
+            const amiiboCard = document.createElement('div');
+            amiiboCard.classList.add('card', 'col', 's3');
+            amiiboCard.innerHTML = `
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="${amiibo.image}" alt="Immagine amiibo">
+                </div>
+                <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">${amiibo.name}<i class="material-icons right">more_vert</i></span>
+                </div>
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">${amiibo.character}<i class="material-icons right">close</i></span>
+                    <p>Game Series: ${amiibo.gameSeries}</p>
+                    <p>Release (NA): ${amiibo.release.na}</p>
+                </div>
+            `;
+            amiiboContainer.appendChild(amiiboCard);
+        });
+    }
+
+    window.onload = () => {
+        gestoreLoad();
+        loadAmiibo();
+    };
+    </script>
+</head>
+<body>
+
+    <div layout:fragment="content">
+        <h1>La gang dei PC</h1>
+        <p>Dal 1880 i primi del settore informatico. Un'azienda in continua evoluzione: dai piccioni viaggiatori ai più moderni PC da gaming, siamo pronti a soddisfare ogni tua esigenza.</p>
+
+        <h3>Prodotti Disponibili</h3>
+        <div class="row">
+            <div th:each="pc : ${listapc}" class="card col s3">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" th:src="${pc.url}" alt="Immagine prodotto">
+                </div>
+                <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4" th:text="${pc.nome}"><i class="material-icons right">more_vert</i></span>
+                </div>
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4" th:text="${pc.marca}"><i class="material-icons right">close</i></span>
+                    <p th:text="${pc.prezzo}"></p>
+                    <p th:text="${pc.descrizione}"></p>
+                    <div class="card-action">
+                        <form action="/process" method="POST">
+                            <input type="hidden" name="nome" th:value="${pc.nome}">
+                            <input type="number" name="num" value="0">
+                            <input type="submit" value="Inserisci nel carrello">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3>Amiibo/Funkopop Disponibili</h3>
+        <div class="row" id="amiiboContainer"></div>
+    </div>
+</body>
+</html>

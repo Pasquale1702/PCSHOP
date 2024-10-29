@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<head>
+    <title>Il tuo Carrello</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        .btn-custom {
+            background-color: #ff5722; /* Colore personalizzato */
+            color: white;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            background-color: #e64a19; /* Colore al passaggio del mouse */
+        }
+
+        input[type="number"] {
+            width: 100px; /* Larghezza del campo input */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2; /* Colore di sfondo per l'intestazione */
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: 10px;
+            right: -10px;
+            background-color: lighten-2;
+            color: black;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .cart-icon {
+            position: relative; /* Necessario per posizionare il badge */
+        }
+    </style>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="container">
+            <h2>Il tuo Carrello</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Marca</th>
+                        <th>Prezzo</th>
+                        <th>Immagine</th>
+                        <th>Quantità</th>
+                        <th>Modifica</th>
+                        <th>Rimuovi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item:${lista}">
+                        <td th:text="${item.nome}"></td>
+                        <td th:text="${item.marca}"></td>
+                        <td th:text="${item.prezzo}"></td>
+                        <td><img th:src="${item.url}" style="width: 50px; height: auto;"></td>
+                        <td th:text="${item.qnt}"></td>
+                        <td>
+                            <form action="/modifica" method="POST">
+                                <input type="hidden" name="nome" th:value="${item.nome}">
+                                <input type="number" placeholder="nuova quantità" name="num"
+                                    min="1" max="${item.qnt}" value="0" class="browser-default">
+                                <input type="submit" value="Modifica" class="btn btn-custom">
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/rimuovi" method="POST">
+                                <input type="hidden" name="nome" th:value="${item.nome}">
+                                <input type="submit" value="Rimuovi" class="btn btn-custom">
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr>
+            <div class="riepilogo">
+                <h3>
+                    Totale: <span th:text="${somma}"></span> €
+                </h3>
+                <form action="/compra" method="POST">
+                    <button class="btn btn-floating btn-large red lighten-2 pulse cart-icon" type="submit" name="action"> 
+                        <i class="material-icons">shopping_cart</i>
+                        <span class="cart-badge" th:text="${#lists.size(lista)}">0</span> <!-- Badge con il conteggio -->
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>
