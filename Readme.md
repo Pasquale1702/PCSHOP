@@ -53,8 +53,7 @@ Esso possiede funzionalità del Carrello, come Modifica, Rimozione e Riepilogo a
 
 FATTURA.HTML
 Rappresenta una pagina di fattura, per un acquisto effettuato in un negozio online.
-
-All'interno è rappresentata la tabella degli acquisti con messaggio e totale (somma), form invio mail con effettivo pulsante per inviare l'indirizzo email.
+All'interno è rappresentata la tabella degli acquisti con messaggio e totale (somma), form invio mail con effettivo pulsante per inviare il riepilogo all'indirizzo email.
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
