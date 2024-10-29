@@ -1,6 +1,6 @@
-------------
+-------------
 ITA
-------------
+-------------
 
 Questi codici rappresentano una parte di un'applicazione web per un negozio di PC, realizzata utilizzando Java e Thymeleaf per il rendering delle pagine, insieme a JavaScript per l'interattività.
 
