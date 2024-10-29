@@ -81,13 +81,9 @@ MODIFICARE IL PROGRAMMA CON LA PROPRIA MAIL E LA PROPRIA PASSWORD PER LE APP DI 
 Screenshot relativi al programma
 
 
-
-
-
-
-
-
-
-
+![4](https://github.com/user-attachments/assets/53111ffd-1518-4630-9e1f-52924933b9e4)
+![1](https://github.com/user-attachments/assets/051e6370-e1b0-4d6f-b027-a62994619ab2)
+![2](https://github.com/user-attachments/assets/f4d54dfe-f0c9-4762-973d-130c8a9ba835)
+![3](https://github.com/user-attachments/assets/a0a1d0ba-0942-4520-8dd6-77fccf589eeb)
 
 
