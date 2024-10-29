@@ -80,6 +80,12 @@ MODIFICARE IL PROGRAMMA CON LA PROPRIA MAIL E LA PROPRIA PASSWORD PER LE APP DI 
 
 Screenshot relativi al programma
 
+<img src="https://url.dell.immagine.com/immagine.png" alt="Descrizione" width="200"/>
+
+
+
+
+
 
 
 
